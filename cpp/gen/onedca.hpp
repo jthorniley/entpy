@@ -7,11 +7,11 @@
 namespace entpy {
 
 using ByteArray2D = Eigen::Array<uint8_t, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>;
-using RuleLookup = Eigen::Array<uint8_t, 8, 1>;
+using CALookupTable = Eigen::Array<uint8_t, 8, 1>;
 
-RuleLookup ruleByNumber(uint8_t ruleNumber);
+CALookupTable rule_number_lookup_table(uint8_t rule_number);
 
-void onedca(Eigen::Ref<ByteArray2D> ca, const RuleLookup& ruleLookup);
+void onedca(Eigen::Ref<ByteArray2D> data, const CALookupTable& lookup_table);
 
 }
 
