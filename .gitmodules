@@ -1,3 +1,9 @@
 [submodule "cpp/eigen"]
 	path = cpp/eigen
 	url = https://github.com/eigenteam/eigen-git-mirror.git
+[submodule "cpp/pybind11"]
+	path = cpp/pybind11
+	url = https://github.com/pybind/pybind11.git
+[submodule "cpp/Catch2"]
+	path = cpp/Catch2
+	url = https://github.com/catchorg/Catch2.git
