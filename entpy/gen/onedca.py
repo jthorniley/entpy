@@ -1,5 +1,5 @@
 """1D Cellular Automata"""
 
-__all__ = ['rule_by_number', 'onedca']
+__all__ = ['rule_number_lookup_table', 'onedca']
 
-from _gen import rule_by_number, onedca
+from _gen import rule_number_lookup_table, onedca
