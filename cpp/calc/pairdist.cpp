@@ -1,4 +1,3 @@
-#include <atomic>
 #include <omp.h>
 #include <boost/math/special_functions/binomial.hpp>
 #include <boost/assert.hpp>
