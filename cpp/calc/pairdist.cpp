@@ -1,7 +1,8 @@
+#include "pairdist.hpp"
+
 #include <omp.h>
 #include <boost/math/special_functions/round.hpp>
 #include <boost/assert.hpp>
-#include "pairdist.hpp"
 
 namespace entpy {
 

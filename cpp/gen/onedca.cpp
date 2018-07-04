@@ -1,6 +1,6 @@
-#include <omp.h>
-
 #include "onedca.hpp"
+
+#include <omp.h>
 
 namespace entpy {
 
