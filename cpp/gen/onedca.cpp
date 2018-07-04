@@ -12,7 +12,7 @@ CALookupTable rule_number_lookup_table(uint8_t rule_number) {
     return result;
 }
 
-void onedca(Eigen::Ref<ByteArray2D> data, const CALookupTable& lookup_table) {
+void onedca(Eigen::Ref<ByteArrayXXd> data, const CALookupTable& lookup_table) {
     const auto nr = data.rows();
     const auto nc = data.cols();
 

@@ -7,7 +7,7 @@
 SCENARIO( "1D CA" ) {
     const auto N = 6;
     std::vector<uint8_t> _data(N*N, 0);
-    auto data = Eigen::Map<entpy::ByteArray2D>(_data.data(), N, N);
+    auto data = Eigen::Map<entpy::ByteArrayXXd>(_data.data(), N, N);
     // All tests have the same result expected
     const std::vector<uint8_t> expected = {
         1, 0, 0, 0, 0, 0,
