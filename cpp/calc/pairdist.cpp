@@ -1,13 +1,11 @@
 #include "pairdist.hpp"
 
 #include <omp.h>
-#include <boost/math/special_functions/round.hpp>
 #include <boost/assert.hpp>
 
 namespace entpy {
 
 Eigen::VectorXd pairdist(Eigen::Ref<const RowMajorMatrixXXd> data) {
-    using namespace boost::math;
     const auto n_samples = data.rows();
     const auto n_dims = data.cols();
 
@@ -16,7 +14,7 @@ Eigen::VectorXd pairdist(Eigen::Ref<const RowMajorMatrixXXd> data) {
         return Eigen::VectorXd::Zero(0);
     }
 
-    const auto n_pairs = iround((n_samples * (n_samples - 1)) / 2.0);
+    const auto n_pairs = (n_samples * (n_samples - 1)) / 2;
     Eigen::VectorXd result = Eigen::VectorXd::Zero(n_pairs);
 
     Eigen::Index ctr = 0;
