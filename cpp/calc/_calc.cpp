@@ -6,7 +6,7 @@
 namespace py = pybind11;
 
 namespace entpy {
-PYBIND11_MODULE(_calc, m) {
+PYBIND11_MODULE(_entpy_calc, m) {
     m.doc() = "Calculation methods (C++ implementations)";
 
     m.def("pairdist", &pairdist,

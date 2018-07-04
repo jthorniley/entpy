@@ -6,7 +6,7 @@
 namespace py = pybind11;
 
 namespace entpy {
-PYBIND11_MODULE(_gen, m) {
+PYBIND11_MODULE(_entpy_gen, m) {
     m.doc() = "Data generating functions (C++ implementations)";
 
     m.def("rule_number_lookup_table", &rule_number_lookup_table,

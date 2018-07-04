@@ -10,8 +10,8 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}
 add_library(gen ${SOURCES})
 set_property(TARGET gen PROPERTY POSITION_INDEPENDENT_CODE on)
 
-pybind11_add_module(_gen _gen.cpp)
-target_link_libraries(_gen PRIVATE gen)
+pybind11_add_module(_entpy_gen _gen.cpp)
+target_link_libraries(_entpy_gen PRIVATE gen)
 
 add_executable(gen_test test.cpp test_onedca.cpp)
 target_link_libraries(gen_test PRIVATE gen)

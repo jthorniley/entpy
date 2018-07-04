@@ -15,8 +15,8 @@ set_property(TARGET calc PROPERTY INCLUDE_DIRECTORIES
     ${Boost_INCLUDE_DIRS}
     ${CMAKE_SOURCE_DIR}/eigen)
 
-pybind11_add_module(_calc _calc.cpp)
-target_link_libraries(_calc PRIVATE calc)
+pybind11_add_module(_entpy_calc _calc.cpp)
+target_link_libraries(_entpy_calc PRIVATE calc)
 
 add_executable(calc_test test.cpp test_pairdist.cpp)
 target_link_libraries(calc_test PRIVATE calc)

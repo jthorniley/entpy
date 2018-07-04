@@ -2,4 +2,4 @@
 
 __all__ = ['pairdist']
 
-from _calc import pairdist
+from _entpy_calc import pairdist
