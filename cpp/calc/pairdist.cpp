@@ -1,5 +1,5 @@
 #include <omp.h>
-#include <boost/math/special_functions/binomial.hpp>
+#include <boost/math/special_functions/round.hpp>
 #include <boost/assert.hpp>
 #include "pairdist.hpp"
 
@@ -15,9 +15,7 @@ Eigen::VectorXd pairdist(Eigen::Ref<const RowMajorMatrixXXd> data) {
         return Eigen::VectorXd::Zero(0);
     }
 
-    const auto count = static_cast<uint32_t>(n_samples);
-    const auto n_pairs_dbl = binomial_coefficient<double>(count, 2);
-    const auto n_pairs = iround(n_pairs_dbl);
+    const auto n_pairs = iround((n_samples * (n_samples - 1)) / 2.0);
     Eigen::VectorXd result = Eigen::VectorXd::Zero(n_pairs);
 
     Eigen::Index ctr = 0;
@@ -28,15 +26,10 @@ Eigen::VectorXd pairdist(Eigen::Ref<const RowMajorMatrixXXd> data) {
             const auto b = data.block(j, 0, 1, n_dims);
             const auto dist = (b - a).norm();
             const auto insert_at = ctr + j - i - 1;
-            BOOST_ASSERT_MSG(insert_at < n_pairs, "Unexpected rounding error");
             result(insert_at) = dist;
         }
         ctr += n_samples - i - 1;
     }
-    // The size of the result array was calculated from an approximate
-    // binomial. Its pretty unlikely that this would go wrong for the sizes
-    // we are looking at, but just in case.
-    BOOST_ASSERT_MSG(ctr == n_pairs, "Unexpected rounding error");
 
     return result;
 }
