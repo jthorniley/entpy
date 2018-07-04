@@ -8,6 +8,8 @@ jupyter = "*"
 scipy = "*"
 matplotlib = "*"
 pillow = "*"
+pytest = "*"
+pytest-runner = "*"
 
 [packages]
 pillow = "*"

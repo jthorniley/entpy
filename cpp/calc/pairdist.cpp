@@ -21,16 +21,18 @@ Eigen::VectorXd pairdist(Eigen::Ref<const RowMajorMatrixXXd> data) {
     const auto n_pairs = iround(n_pairs_dbl);
     Eigen::VectorXd result = Eigen::VectorXd::Zero(n_pairs);
 
-    std::atomic_int64_t ctr(0);
-    for (Eigen::Index i = 0; i < n_samples; ++i) {
+    Eigen::Index ctr = 0;
+    for (Eigen::Index i = 0; i < n_samples - 1; ++i) {
         const auto a = data.block(i, 0, 1, n_dims);
 #pragma omp parallel for
         for (Eigen::Index j = i + 1; j < n_samples; ++j) {
             const auto b = data.block(j, 0, 1, n_dims);
             const auto dist = (b - a).norm();
-            BOOST_ASSERT_MSG(ctr < n_pairs, "Unexpected rounding error");
-            result(ctr.fetch_add(1)) = dist;
+            const auto insert_at = ctr + j - i - 1;
+            BOOST_ASSERT_MSG(insert_at < n_pairs, "Unexpected rounding error");
+            result(insert_at) = dist;
         }
+        ctr += n_samples - i - 1;
     }
     // The size of the result array was calculated from an approximate
     // binomial. Its pretty unlikely that this would go wrong for the sizes
