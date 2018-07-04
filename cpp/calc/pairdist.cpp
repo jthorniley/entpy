@@ -1,3 +1,5 @@
+#include <atomic>
+#include <omp.h>
 #include <boost/math/special_functions/binomial.hpp>
 #include <boost/assert.hpp>
 #include "pairdist.hpp"
@@ -19,14 +21,15 @@ Eigen::VectorXd pairdist(Eigen::Ref<const RowMajorMatrixXXd> data) {
     const auto n_pairs = iround(n_pairs_dbl);
     Eigen::VectorXd result = Eigen::VectorXd::Zero(n_pairs);
 
-    Eigen::Index ctr = 0;
+    std::atomic_int64_t ctr(0);
     for (Eigen::Index i = 0; i < n_samples; ++i) {
+        const auto a = data.block(i, 0, 1, n_dims);
+#pragma omp parallel for
         for (Eigen::Index j = i + 1; j < n_samples; ++j) {
-            const auto a = data.block(i, 0, 1, n_dims);
             const auto b = data.block(j, 0, 1, n_dims);
             const auto dist = (b - a).norm();
             BOOST_ASSERT_MSG(ctr < n_pairs, "Unexpected rounding error");
-            result(ctr++) = dist;
+            result(ctr.fetch_add(1)) = dist;
         }
     }
     // The size of the result array was calculated from an approximate
