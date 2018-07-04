@@ -8,6 +8,7 @@ Probably, for now, install for development:
 
     $ pipenv sync
     $ git submodule update --init --recursive
+    $ export CMAKE_PREFIX_PATH=/path/to/boost_1_67_0
     $ python setup.py develop
 
 ## More to follow

@@ -11,7 +11,7 @@ SCENARIO( "Pairwise distances" ) {
             1, 1,
             2, 2
         };
-        auto data = Eigen::Map<const entpy::DoubleArrayXXd>(points.data(), 3, 2);
+        auto data = Eigen::Map<const entpy::RowMajorMatrixXXd>(points.data(), 3, 2);
         WHEN( "Pairwise distances are calculated" ) {
             const auto result = entpy::pairdist(data);
             THEN( "Matches precalculated data" ) {
@@ -29,7 +29,7 @@ SCENARIO( "Pairwise distances" ) {
 
     GIVEN( "An empty set of points" ) {
         const std::vector<double> points;
-        auto data = Eigen::Map<const entpy::DoubleArrayXXd>(points.data(), 0, 0);
+        auto data = Eigen::Map<const entpy::RowMajorMatrixXXd>(points.data(), 0, 0);
         WHEN( "Pairwise distances are calculated" ) {
             const auto result = entpy::pairdist(data);
             THEN( "The program has not crashed" ) {
@@ -40,7 +40,7 @@ SCENARIO( "Pairwise distances" ) {
 
     GIVEN( "A large set of points" ) {
         const std::vector<double> points(5000, 0);
-        auto data = Eigen::Map<const entpy::DoubleArrayXXd>(points.data(), 1000, 5);
+        auto data = Eigen::Map<const entpy::RowMajorMatrixXXd>(points.data(), 1000, 5);
         WHEN( "Pairwise distances are calculated" ) {
             const auto result = entpy::pairdist(data);
             THEN( "Results are obtained" ) {
