@@ -1,7 +1,6 @@
 #include "pairdist.hpp"
 
 #include <omp.h>
-#include <boost/assert.hpp>
 
 namespace entpy {
 
