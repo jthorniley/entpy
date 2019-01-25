@@ -5,6 +5,7 @@ Some calculations I find interesting and wanted a collection of.
 ## Usage
 
 Simple installation method:
+
     $ git submodule update --init --recursive
     $ export CMAKE_PREFIX_PATH=/path/to/boost_1_67_0
     $ curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
