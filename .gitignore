@@ -1,10 +1,14 @@
-build*
-.idea*
-.pytest_cache
+build*/
+dist*/
+.vscode*/
+*venv*/
+.idea*/
+.pytest_cache/
 
 CMakeLists.txt.user
 *.so
 .ipynb_checkpoints
 *.egg-info
+*.eggs/
 __pycache__
 *.ipynb

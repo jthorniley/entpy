@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "entpy"
+version = "0.1.0"
+description = ""
+license = "GPLv3"
+authors = ["James Thorniley <james.thorniley@gmail.com>"]
+build = "build.py"
+include = ["cpp/**/*"]
+exclude = ["cpp/**/.git/*"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+numpy = "^1.16"
+
+[tool.poetry.dev-dependencies]
+jupyter = "^1.0"
+pytest = "^4.1"
+pylint = "^2.2"
+pillow = "^5.4"
+matplotlib = "^3.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

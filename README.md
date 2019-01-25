@@ -4,12 +4,13 @@ Some calculations I find interesting and wanted a collection of.
 
 ## Usage
 
-Probably, for now, install for development:
-
-    $ pipenv sync
+Simple installation method:
     $ git submodule update --init --recursive
     $ export CMAKE_PREFIX_PATH=/path/to/boost_1_67_0
-    $ python setup.py develop
+    $ curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+    $ poetry install
+    $ poetry run pytest  # Run pytests
+    $ poetry run jupyter notebook  # Load notebook with module available
 
 ## More to follow
 
