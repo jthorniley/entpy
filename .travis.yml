@@ -16,7 +16,7 @@ jobs:
 
 install:
   - if [ ! -d boost_1_69_0 ]; then curl -sSL https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.tar.gz | tar zx; fi
-  - export CMAKE_PREFIX_PATH=boost_1_69_0
+  - export CMAKE_PREFIX_PATH=$HOME/boost_1_69_0
   - pip install pip -U
   - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
   - source $HOME/.poetry/env
