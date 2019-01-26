@@ -1,6 +1,7 @@
 #include "shannonent.hpp"
 
 #include <algorithm>
+#include <numeric>
 #include <functional>
 #include <vector>
 
@@ -38,7 +39,8 @@ struct LogBase : public Log {
 
 namespace entpy {
 
-double shannonent_(Eigen::VectorXi data, const Log& log) {
+double shannonent_(Eigen::VectorXi data, 
+                   const std::function<double(double)>& f_log_f) {
     const auto n = data.size();
     std::sort(data.data(), data.data() + n);
 
@@ -55,23 +57,22 @@ double shannonent_(Eigen::VectorXi data, const Log& log) {
     freq.push_back(float(n - accum)/n);
 
     double sum = 0.0;
-    for (const auto f : freq) {
-        sum -= f * log(f);
-    }
+    const auto n_symbols = freq.size();
 
-    return sum;    
+    std::transform(freq.begin(), freq.end(), freq.begin(), f_log_f);
+    return -std::accumulate(freq.begin(), freq.end(), 0.0);
 }
 
 double shannonent_bits(Eigen::VectorXi data) {
-    return shannonent_(std::move(data), Log2());
+    return shannonent_(std::move(data), [](double f) { return f * std::log2(f); });
 }
 
 double shannonent_nats(Eigen::VectorXi data) {
-    return shannonent_(std::move(data), LogNatural());
+    return shannonent_(std::move(data), [](double f) { return f * std::log(f); });
 }
 
 double shannonent_base(Eigen::VectorXi data, double base) {
-    return shannonent_(std::move(data), LogBase(base));
+    return shannonent_(std::move(data), [denom = std::log(base)](double f) { return f * std::log(f) / denom; });
 }
 
 }  // namespace entpy
