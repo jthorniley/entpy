@@ -7,39 +7,7 @@
 
 namespace {
 
-struct Log {
-    virtual double operator()(double) const = 0;
-};
-
-struct LogNatural : public Log {
-    double operator()(double x) const override {
-        return std::log(x);
-    }
-};
-
-struct Log2 : public Log{
-    double operator()(double x) const override {
-        return std::log2(x);
-    }
-};
-
-struct LogBase : public Log {
-    double denom;
-
-    LogBase(double base) {
-        denom = std::log(base);
-    }
-
-    double operator()(double x) const override {
-        return std::log(x) / denom;
-    }
-};
-
-}  // namespace
-
-namespace entpy {
-
-double shannonent_(Eigen::VectorXi data, 
+double shannonent(Eigen::VectorXi data, 
                    const std::function<double(double)>& f_log_f) {
     const auto n = data.size();
     std::sort(data.data(), data.data() + n);
@@ -63,16 +31,33 @@ double shannonent_(Eigen::VectorXi data,
     return -std::accumulate(freq.begin(), freq.end(), 0.0);
 }
 
+}  // namespace
+
+namespace entpy {
+
+
 double shannonent_bits(Eigen::VectorXi data) {
-    return shannonent_(std::move(data), [](double f) { return f * std::log2(f); });
+    return shannonent(std::move(data), 
+        [](double f) { 
+            return f * std::log2(f); 
+        }
+    );
 }
 
 double shannonent_nats(Eigen::VectorXi data) {
-    return shannonent_(std::move(data), [](double f) { return f * std::log(f); });
+    return shannonent(std::move(data), 
+        [](double f) { 
+            return f * std::log(f); 
+        }
+    );
 }
 
 double shannonent_base(Eigen::VectorXi data, double base) {
-    return shannonent_(std::move(data), [denom = std::log(base)](double f) { return f * std::log(f) / denom; });
+    return shannonent(std::move(data), 
+        [denom = std::log(base)](double f) { 
+            return f * std::log(f) / denom;
+        }
+    );
 }
 
 }  // namespace entpy
