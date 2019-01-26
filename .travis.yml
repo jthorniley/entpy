@@ -7,7 +7,7 @@ cache:
   pip: true
   directories:
     - $HOME/.cache/pypoetry
-    - $HOME/boost_1_16_0
+    - $HOME/boost_1_69_0
 
 jobs:
   fast_finish: true
@@ -16,7 +16,7 @@ jobs:
 
 install:
   - pushd $HOME;
-    if [ ! -d boost_1_69_0 ];
+    if [ ! -d boost_1_69_0/boost ];
     then 
       curl -sSL https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.tar.gz | tar zx;
     fi;
