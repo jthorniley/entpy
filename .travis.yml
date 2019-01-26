@@ -15,7 +15,12 @@ jobs:
     - python: 3.6
 
 install:
-  - if [ ! -d boost_1_69_0 ]; then curl -sSL https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.tar.gz | tar zx; fi
+  - pushd $HOME
+    if [ ! -d boost_1_69_0 ]
+    then 
+      curl -sSL https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.tar.gz | tar zx
+    fi
+    popd
   - export CMAKE_PREFIX_PATH=$HOME/boost_1_69_0
   - pip install pip -U
   - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
