@@ -6,16 +6,20 @@ def shannonent(data: np.ndarray, units: str = 'bits'):
 
     The Shannon entropy is defined as
 
-        $ H(X) = -\sum_{x \in \mathcal{X}} p(x) \log p(x) $
+    .. math::
 
-    Where each $x$ is a discrete symbol in the support set 
-    $\mathcal{X}$. The simple estimator is obtained by calculating the
-    relative frequency of each symbol 
-    $f(x) = \frac{n(x)}{\sum_{x \in \mathcal{X}}n(x)}$ and using that
-    as an estimate of the probabilities:
+        H(X) = -\sum_{x \in \mathcal{X}} p(x) \log p(x)
 
-        $ \hat{H}(X) = -\sum_{x \in \mathcal{X}} f(x) \log f(x) $
-    
+    Where each :math:`x` is a discrete symbol in the support set 
+    :math:`\mathcal{X}`. The simple estimator is obtained by calculating
+    the relative frequency of each symbol :math:`f(x) = \frac{n(x)}
+    {\sum_{x \in \mathcal{X}}n(x)}` and using that as an estimate of the
+    probabilities:
+
+    .. math::
+
+        \hat{H}(X) = -\sum_{x \in \mathcal{X}} f(x) \log f(x)
+ 
     Parameters
     ----------
 
@@ -36,19 +40,48 @@ def shannonent(data: np.ndarray, units: str = 'bits'):
     float
         Estimated entropy
 
+    Examples
+    --------
+
+        >>> import entpy.calc
+        >>> entpy.calc.shannonent([0, 1] * 20, 'bits')
+        1.0
+        >>> entpy.calc.shannonent([0, 1] * 20, 'nats')
+        0.6931471805599453
+        >>> entpy.calc.shannonent([0, 1] * 20, 2)
+        1.0
+        >>> entpy.calc.shannonent("1234")
+        2.0
+
     """
 
     data = np.array(data, copy=False).flatten()
+    if data.shape[0] == 1:
+        # There is only one element in the array. If that element
+        # is iterable (e.g. it is a string) assume we want the entropy
+        # of the elements
+        try:
+            iter_data = np.array([x for x in data[0]])
+        except TypeError:
+            # Couldn't iterate, leave data alone
+            pass
+        else:
+            data = iter_data
     data_dtype = data.dtype
     if np.issubdtype(data_dtype, np.inexact):
         raise TypeError(f"Data type {data_dtype} is not discrete")
+    if units not in ('bits', 'nats'):
+        try:
+            units = np.float(units)
+        except (ValueError, TypeError):
+            raise ValueError(f"units must be 'bits', 'nats' or a number")
     
     return _shannonent_py(data, units)
     
 def _shannonent_py(data, units):
     """Simple numpy implementation"""
 
-    symbols, counts = np.unique(data, return_counts=True)
+    _, counts = np.unique(data, return_counts=True)
     total = float(data.shape[0])
     freq = counts.astype(float) / total
 
