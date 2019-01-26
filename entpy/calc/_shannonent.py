@@ -57,6 +57,10 @@ def shannonent(data: np.ndarray, units: str = 'bits'):
     """
 
     data = np.array(data, copy=False).flatten()
+    if data.shape[0] == 0:
+        # Empty array has zero entropy (return early to avoid
+        # type checking)
+        return 0.0
     if data.shape[0] == 1:
         # There is only one element in the array. If that element
         # is iterable (e.g. it is a string) assume we want the entropy
@@ -75,7 +79,10 @@ def shannonent(data: np.ndarray, units: str = 'bits'):
         try:
             units = np.float(units)
         except (ValueError, TypeError):
-            raise ValueError(f"units must be 'bits', 'nats' or a number")
+            raise ValueError("units must be 'bits', 'nats' or a number")
+        else:
+            if units <= 0.0:
+                raise ValueError("numeric units must be positive")
     
     return _shannonent_py(data, units)
     
@@ -95,5 +102,5 @@ def _shannonent_py(data, units):
 
     log_freq = log_function(freq)
 
-    return -np.sum(freq * log_freq)
+    return max(0.0, -np.sum(freq * log_freq))
 
