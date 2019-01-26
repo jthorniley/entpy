@@ -23,16 +23,17 @@ def shannonent(data: np.ndarray, units: str = 'bits'):
     Parameters
     ----------
 
-        data : array_like
+        data : array_like or iterable
             The data to estimate from. This must be a discrete dtype
             (Shannon entropy does not make sense on floating point
             values, but you can use integers, boolean, or string 
             symbols.)
         units : {"bits", "nats", float}
             Specify the units.
-            * "bits" will take the logarithm to base 2
-            * "nats" will use the natual logarithm (base $e$)
-            * Some other base (specify as float)
+            
+            * ``"bits"`` will take the logarithm to base 2
+            * ``"nats"`` will use the natual logarithm (base :math:`e`)
+            * Some other base (specify as ``float``)
 
     Returns
     -------
