@@ -1,6 +1,8 @@
 """Shannon entropy"""
 import numpy as np
 
+from _entpy_calc import shannonent_bits, shannonent_nats, shannonent_base
+
 def shannonent(data: np.ndarray, units: str = 'bits'):
     r"""Estimate Shannon entropy from data.
 
@@ -84,7 +86,13 @@ def shannonent(data: np.ndarray, units: str = 'bits'):
             if units <= 0.0:
                 raise ValueError("numeric units must be positive")
     
-    return _shannonent_py(data, units)
+    if units == "bits":
+        return shannonent_bits(data)
+    elif units == "nats":
+        return shannonent_nats(data)
+    else:
+        return shannonent_base(data, units)
+
     
 def _shannonent_py(data, units):
     """Simple numpy implementation"""
