@@ -1,3 +1,5 @@
+![Build status](https://travis-ci.org/jthorniley/entpy.svg?branch=master)
+
 # Entpy - entropy, information and complexity calculations
 
 Some calculations I find interesting and wanted a collection of.
