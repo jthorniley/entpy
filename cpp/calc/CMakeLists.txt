@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.9)
 
 set(SOURCES 
     arraywrapper.hpp
-	pairdist.hpp
+    pairdist.hpp
     pairdist.cpp
     shannonent.hpp
     shannonent.cpp)
