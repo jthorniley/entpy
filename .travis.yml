@@ -23,10 +23,18 @@ install:
     fi;
     popd
   - export CMAKE_PREFIX_PATH=$HOME/boost_1_69_0
+  - mkdir cppbuild
+  - cd cppbuild
+  - cmake ../cpp
+  - make
+  - cd ..
   - pip install pip -U
   - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
   - source $HOME/.poetry/env
   - poetry install -v
   - poetry build -v
 
-script: poetry run pytest
+script: 
+  - poetry run pytest
+  - cd cppbuild
+  - make test

@@ -1,8 +1,8 @@
 // Copyright (c) 2019 James Thorniley
 // License: GPLv3
 
-#ifndef CPP_CALC_ARRAY_HPP_
-#define CPP_CALC_ARRAY_HPP_
+#ifndef CPP_CALC_ARRAYWRAPPER_HPP_
+#define CPP_CALC_ARRAYWRAPPER_HPP_
 
 #include <algorithm>
 #include <exception>
@@ -17,12 +17,12 @@ T xor_function(const T& a, const T& b) {
 }
 
 template <typename T>
-class Array {
+class ArrayWrapper {
  public:
-    Array(T* data, size_t n) : data_(data), n_(n) {
+    ArrayWrapper(T* data, size_t n) : data_(data), n_(n) {
     }
 
-    void swap(Array<T>& other) {
+    void swap(ArrayWrapper<T>& other) {
         if (other.n_ != n_) {
             throw std::runtime_error("Arrays must be of equal length");
         }
@@ -44,7 +44,7 @@ class Array {
         return data_[index];
     }
 
-    bool lessThan(const Array<T>& other) const {
+    bool lessThan(const ArrayWrapper<T>& other) const {
         if (other.n_ != n_) {
             throw std::runtime_error("Arrays must be of equal length");
         }
@@ -62,15 +62,15 @@ class Array {
 };
 
 template <typename T>
-bool operator<(const Array<T>& lhs, const Array<T>& rhs) {
+bool operator<(const ArrayWrapper<T>& lhs, const ArrayWrapper<T>& rhs) {
     return lhs.lessThan(rhs);
 }
 
 template <typename T>
-void swap(Array<T>& a, Array<T>& b) {
+void swap(ArrayWrapper<T>& a, ArrayWrapper<T>& b) {
     a.swap(b);
 }
 
 }  // namespace entpy
 
-#endif  // CPP_CALC_ARRAY_HPP_
+#endif  // CPP_CALC_ARRAYWRAPPER_HPP_

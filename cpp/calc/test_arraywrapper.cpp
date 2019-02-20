@@ -7,7 +7,7 @@
 
 #include <catch.hpp>
 
-#include "array.hpp"
+#include "arraywrapper.hpp"
 
 namespace entpy {
 
@@ -17,8 +17,8 @@ TEST_CASE("entpy Arrays") {
     int data_a[5] = {1, 2, 3, 4, 5};
     int data_b[5] = {1, 3, 2, 4, 1};
 
-    Array<int> a(data_a, 5);
-    Array<int> b(data_b, 5);
+    ArrayWrapper<int> a(data_a, 5);
+    ArrayWrapper<int> b(data_b, 5);
     REQUIRE(a[0] == 1);
     REQUIRE(a[1] == 2);
     REQUIRE(a[4] == 5);
@@ -48,7 +48,7 @@ TEST_CASE("entpy Arrays") {
         REQUIRE(data_a[1] == 3);
         REQUIRE(data_a[2] == 2);
     }
-/*
+
     SECTION("Can copy") {
         a = b;
         REQUIRE(a[0] == 1);
@@ -67,7 +67,7 @@ TEST_CASE("entpy Arrays") {
         REQUIRE(b[0] == 1);
         REQUIRE(b[1] == 3);
         REQUIRE(b[2] == 2);
-    }*/
+    }
 }
 
 TEST_CASE("Array sorting") {
@@ -80,10 +80,10 @@ TEST_CASE("Array sorting") {
         {2, 2, 1}
     };
 
-    std::vector<Array<int>> arrays;
-    arrays.emplace_back(Array<int>(data[0], 3));
-    arrays.emplace_back(Array<int>(data[1], 3));
-    arrays.emplace_back(Array<int>(data[2], 3));
+    std::vector<ArrayWrapper<int>> arrays;
+    arrays.emplace_back(ArrayWrapper<int>(data[0], 3));
+    arrays.emplace_back(ArrayWrapper<int>(data[1], 3));
+    arrays.emplace_back(ArrayWrapper<int>(data[2], 3));
 
     SECTION("No effect when already sorted") {
         std::sort(arrays.begin(), arrays.end());
@@ -96,10 +96,10 @@ TEST_CASE("Array sorting") {
     }
 
     SECTION("Sorts unsorted array") {
-        std::vector<Array<int>> arrays;
-        arrays.emplace_back(Array<int>(data[2], 3));
-        arrays.emplace_back(Array<int>(data[1], 3));
-        arrays.emplace_back(Array<int>(data[0], 3));
+        std::vector<ArrayWrapper<int>> arrays;
+        arrays.emplace_back(ArrayWrapper<int>(data[2], 3));
+        arrays.emplace_back(ArrayWrapper<int>(data[1], 3));
+        arrays.emplace_back(ArrayWrapper<int>(data[0], 3));
         // N.B. data are now swapped!
         REQUIRE_THAT(std::vector<int>(&arrays[0][0], &arrays[0][0] + 3),
                      Equals(std::vector<int>({2, 2, 1})));
