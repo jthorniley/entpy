@@ -25,7 +25,7 @@ install:
   - export CMAKE_PREFIX_PATH=$HOME/boost_1_69_0
   - mkdir cppbuild
   - cd cppbuild
-  - cmake ../cpp
+  - cmake ../cpp -DPYTHON_EXECUTABLE=$(which python3)
   - make
   - cd ..
   - pip install pip -U
