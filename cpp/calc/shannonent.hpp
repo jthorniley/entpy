@@ -1,5 +1,7 @@
-#ifndef ENTPY_CPP_CALC_SHANNONENT_HPP_
-#define ENTPY_CPP_CALC_SHANNONENT_HPP_
+// Copyright 2019 James Thorniley
+
+#ifndef CPP_CALC_SHANNONENT_HPP_
+#define CPP_CALC_SHANNONENT_HPP_
 
 #include <Eigen/Dense>
 
@@ -20,4 +22,4 @@ double shannonent_base(Eigen::VectorXi data, double base);
 
 }  // namespace entpy
 
-#endif  // ENTPY_CPP_CALC_SHANNONENT_HPP_
+#endif  // CPP_CALC_SHANNONENT_HPP_
