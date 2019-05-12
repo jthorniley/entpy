@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 
 set(SOURCES 
-    arraywrapper.hpp
     pairdist.hpp
     pairdist.cpp
     shannonent.hpp
@@ -21,7 +20,7 @@ set_property(TARGET calc PROPERTY INCLUDE_DIRECTORIES
 pybind11_add_module(_entpy_calc _calc.cpp)
 target_link_libraries(_entpy_calc PRIVATE calc)
 
-add_executable(calc_test test.cpp test_arraywrapper.cpp test_pairdist.cpp test_shannonent.cpp)
+add_executable(calc_test test.cpp test_pairdist.cpp test_shannonent.cpp)
 target_link_libraries(calc_test PRIVATE calc)
 
 add_test(NAME calc_module COMMAND calc_test)

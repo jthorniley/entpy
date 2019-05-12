@@ -1,3 +1,5 @@
+// Copyright 2019 James Thorniley
+
 #include "pairdist.hpp"
 
 #include <omp.h>
@@ -32,4 +34,4 @@ Eigen::VectorXd pairdist(Eigen::Ref<const RowMajorMatrixXXd> data) {
     return result;
 }
 
-}  // namespace
+}  // namespace entpy

@@ -1,11 +1,14 @@
-#ifndef ENTPY_CPP_CALC_PAIRDIST_HPP_
-#define ENTPY_CPP_CALC_PAIRDIST_HPP_
+// Copyright 2019 James Thorniley
+
+#ifndef CPP_CALC_PAIRDIST_HPP_
+#define CPP_CALC_PAIRDIST_HPP_
 
 #include <Eigen/Dense>
 
 namespace entpy {
 
-using RowMajorMatrixXXd = Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>;
+using RowMajorMatrixXXd =
+    Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>;
 
 /**
  * @brief Calculate pairwise distances between all elements
@@ -16,4 +19,4 @@ Eigen::VectorXd pairdist(Eigen::Ref<const RowMajorMatrixXXd> data);
 
 }  // namespace entpy
 
-#endif  // ENTPY_CPP_CALC_PAIRDIST_HPP_
+#endif  // CPP_CALC_PAIRDIST_HPP_

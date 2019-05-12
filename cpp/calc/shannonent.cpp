@@ -1,3 +1,5 @@
+// Copyright 2019 James Thorniley
+
 #include "shannonent.hpp"
 
 #include <algorithm>
@@ -7,8 +9,8 @@
 
 namespace {
 
-double shannonent(Eigen::VectorXi data, 
-                   const std::function<double(double)>& f_log_f) {
+double shannonent(Eigen::VectorXi data,
+                  const std::function<double(double)>& f_log_f) {
     const auto n = data.size();
     std::sort(data.data(), data.data() + n);
 
@@ -17,7 +19,7 @@ double shannonent(Eigen::VectorXi data,
     int current_symbol = data[0];
     for (Eigen::VectorXi::Index i = 1; i < n; ++i) {
         if (data[i] != current_symbol) {
-            freq.push_back(float(i - accum)/n);
+            freq.push_back(static_cast<float>(i - accum)/n);
             accum = i;
             current_symbol = data[i];
         }

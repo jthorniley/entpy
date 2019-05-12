@@ -1,3 +1,5 @@
+// Copyright 2019 James Thorniley
+
 #include <catch.hpp>
 
 #include "shannonent.hpp"
