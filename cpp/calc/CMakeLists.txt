@@ -4,7 +4,9 @@ set(SOURCES
     pairdist.hpp
     pairdist.cpp
     shannonent.hpp
-    shannonent.cpp)
+    shannonent.cpp
+    sort.hpp
+    sort.cpp)
 
 find_package(Boost REQUIRED)
 find_package(OpenMP REQUIRED)
@@ -20,7 +22,11 @@ set_property(TARGET calc PROPERTY INCLUDE_DIRECTORIES
 pybind11_add_module(_entpy_calc _calc.cpp)
 target_link_libraries(_entpy_calc PRIVATE calc)
 
-add_executable(calc_test test.cpp test_pairdist.cpp test_shannonent.cpp)
+add_executable(calc_test 
+    test.cpp 
+    test_pairdist.cpp 
+    test_shannonent.cpp
+    test_sort.cpp)
 target_link_libraries(calc_test PRIVATE calc)
 
 add_test(NAME calc_module COMMAND calc_test)
