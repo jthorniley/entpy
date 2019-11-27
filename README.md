@@ -4,6 +4,10 @@
 
 Some calculations I find interesting and wanted a collection of.
 
+## Prerequisites
+
+Ensure you have a C++ build system including cmake available.
+
 ## Usage
 
 Simple installation method:
@@ -20,7 +24,9 @@ Simple installation method:
 ```python
 >>> import numpy as np
 >>> import entpy.gen
->>> print(np.array2string(entpy.gen.sierpinski(32), separator='', threshold=10000, max_line_width=1000, formatter={'int':lambda x:' ^'[x]}))
+>>> print(np.array2string(entpy.gen.sierpinski(32), separator='',
+...     threshold=10000, max_line_width=1000,
+...     formatter={'int':lambda x:' ^'[x]}))
 [[                                ^                                ]
  [                               ^ ^                               ]
  [                              ^   ^                              ]
