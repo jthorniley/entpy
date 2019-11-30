@@ -18,7 +18,7 @@ jobs:
 install:
   - pushd $HOME;
     if [ ! -d boost_1_69_0/boost ];
-    then 
+    then
       curl -sSL https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.tar.gz | tar zx;
     fi;
     popd
@@ -34,7 +34,7 @@ install:
   - poetry install -v
   - poetry build -v
 
-script: 
-  - poetry run pytest
+script:
+  - poetry run pytest --doctest-modules
   - cd cppbuild
   - make test
